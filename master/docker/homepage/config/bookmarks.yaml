@@ -1,0 +1,16 @@
+# ============================================================
+# Bookmarks — small link chips shown below your services.
+# Docs: https://gethomepage.dev/configs/bookmarks/
+# Delete the [] line and uncomment the block below to use them.
+# ============================================================
+[]
+
+# - Reference:
+#     - Homepage docs:
+#         - abbr: HP
+#           icon: mdi-book-open-variant
+#           href: https://gethomepage.dev/
+#     - Google Drive:
+#         - abbr: GD
+#           icon: si-googledrive
+#           href: https://drive.google.com

@@ -1,0 +1,15 @@
+[Unit]
+Description=Pi Fleet Command dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/fleet-dashboard
+EnvironmentFile=/home/pi/fleet-dashboard/dashboard.env
+ExecStart=/usr/bin/python3 /home/pi/fleet-dashboard/app.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

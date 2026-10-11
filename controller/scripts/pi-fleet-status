@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -u
+
+KEY="${PI_FLEET_KEY:-$HOME/.ssh/pi-fleet-keys/id_ed25519}"
+# One line per Pi address (a Pi with Ethernet + Wi-Fi can be listed twice)
+HOSTS=(
+  "192.168.1.10"
+  "192.168.1.30"
+  "192.168.1.31"
+  "192.168.1.20"
+  "192.168.1.40"
+)
+USERS=(pi ubuntu admin)   # login names to try, in order
+
+remote_cmd='printf "host=%s user=%s\n" "$(hostname)" "$(id -un)"; printf "os="; (lsb_release -ds 2>/dev/null || . /etc/os-release 2>/dev/null && printf "%s" "$PRETTY_NAME" || uname -s); printf "\nkernel="; uname -r; printf "\nuptime="; uptime -p; printf "\ndisk_root="; df -h / | awk "NR==2 {print \$3 \" used / \" \$2 \" total (\" \$5 \")\"}"; if command -v apt >/dev/null 2>&1; then printf "\napt_upgradable="; apt list --upgradable 2>/dev/null | awk "NR>1 {c++} END {print c+0}"; fi; printf "\n"'
+
+if [[ ! -f "$KEY" ]]; then
+  echo "Missing SSH key: $KEY" >&2
+  exit 1
+fi
+
+for host in "${HOSTS[@]}"; do
+  echo "==== $host ===="
+  ok=0
+  for user in "${USERS[@]}"; do
+    if out=$(ssh -i "$KEY" \
+      -o IdentitiesOnly=yes \
+      -o BatchMode=yes \
+      -o ConnectTimeout=5 \
+      -o StrictHostKeyChecking=accept-new \
+      "$user@$host" "$remote_cmd" 2>&1); then
+      echo "$out"
+      ok=1
+      break
+    fi
+  done
+  if [[ "$ok" -eq 0 ]]; then
+    echo "No key-based login succeeded for users: ${USERS[*]}"
+  fi
+  echo
+done

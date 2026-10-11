@@ -1,0 +1,38 @@
+# ============================================================
+# Home Pi Fleet — verified read-only service cards
+# No SSH credentials, update controls, API tokens, or privileged actions.
+# ============================================================
+
+- Fleet:
+    - Master Pi:
+        href: http://192.168.1.10:3000
+        description: Ollama, Docker services, fileshare master, and Homepage
+        icon: mdi-raspberry-pi
+        ping: 192.168.1.10
+    - Replica Pi (NAS):
+        href: https://192.168.1.20
+        description: NAS replica · Ethernet .20 · Wi-Fi .21
+        icon: mdi-database-sync
+        ping: 192.168.1.20
+    - Control Pi (Hermes):
+        description: Hermes control node and Telegram gateway (.40 / .41)
+        icon: mdi-crown
+        ping: 192.168.1.40
+    - DNS Pi (Pi-hole):
+        href: http://192.168.1.30/admin/
+        description: Network DNS filtering · Ethernet .30 · Wi-Fi .31
+        icon: mdi-shield-home
+        ping: 192.168.1.30
+        siteMonitor: http://192.168.1.30/admin/
+
+- Management:
+    - Portainer:
+        href: http://192.168.1.10:9000
+        description: Docker management on the master Pi
+        icon: portainer
+        siteMonitor: http://192.168.1.10:9000
+    - Syncthing:
+        href: http://192.168.1.10:8384
+        description: Fileshare replication service
+        icon: syncthing
+        siteMonitor: http://192.168.1.10:8384

@@ -1,0 +1,11 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:v2.26
+    container_name: ntfy
+    command: serve
+    restart: unless-stopped
+    ports:
+      - "192.168.1.10:8080:80"
+    volumes:
+      - ./server.yml:/etc/ntfy/server.yml:ro
+      - ./data:/var/lib/ntfy

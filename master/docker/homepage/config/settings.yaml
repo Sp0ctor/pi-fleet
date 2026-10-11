@@ -1,0 +1,65 @@
+# ============================================================
+# Home Pi Fleet — Homepage settings
+# Docs: https://gethomepage.dev/configs/settings/
+# Every option below is safe to tweak; comments show alternatives.
+# ============================================================
+
+title: Home Pi Fleet
+description: Master, replica, and backup operations
+startUrl: /#fleet
+
+# ---- Theme ----
+# theme: dark | light  (omit to follow the browser)
+theme: dark
+# color: accent palette. Try: slate, gray, zinc, neutral, stone,
+# red, orange, amber, yellow, lime, green, emerald, teal, cyan,
+# sky, blue, indigo, violet, purple, fuchsia, pink, rose
+color: slate
+
+# ---- Header / cards ----
+# headerStyle: underlined | boxed | clean | boxedWidgets
+headerStyle: boxedWidgets
+# cardBlur: xs | sm | md | lg — frosted-glass effect on cards
+cardBlur: sm
+# statusStyle: dot (small colored dot) | basic (text) — used with ping/siteMonitor
+statusStyle: dot
+
+# ---- Icons ----
+# iconStyle: gradient looks good on dark themes; "theme" matches accent color
+iconStyle: gradient
+
+# ---- Background (optional) ----
+# Uncomment for a subtle dark backdrop. Any URL or a file placed in
+# config/images/ (referenced as /images/yourfile.jpg) works.
+# background:
+#   image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+#   blur: sm          # xs | sm | md | xl
+#   saturate: 50      # 0–100
+#   brightness: 40    # 0–100 (low = darker, keeps text readable)
+#   opacity: 40       # 0–100
+
+# ---- Misc polish ----
+hideVersion: true
+# useEqualHeights makes cards in a row the same height — tidier grid
+useEqualHeights: true
+
+# Quick launch: press any key on the dashboard to search your services
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true   # set false if you want web search too
+  hideVisitURL: false
+
+# ---- Layout ----
+# Each key matches a group name in services.yaml.
+# style: row (horizontal cards) | columns (vertical stacks)
+# columns: how many cards per row (1–8)
+# icon: any mdi-* / si-* icon, or an image URL
+layout:
+  Fleet:
+    style: row
+    columns: 2
+    icon: mdi-server-network
+  Management:
+    style: row
+    columns: 2
+    icon: mdi-cog-outline

@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  unbound:
+    image: mvance/unbound:latest
+    container_name: unbound
+    restart: unless-stopped
+    networks:
+      - homelab
+    ports:
+      - "5335:5335/tcp"
+      - "5335:5335/udp"
+networks:
+  homelab:
+    driver: bridge

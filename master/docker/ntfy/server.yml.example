@@ -1,0 +1,6 @@
+# Minimal ntfy server config - copy to server.yml
+base-url: "http://192.168.1.10:8080"
+cache-file: "/var/lib/ntfy/cache.db"
+auth-file: "/var/lib/ntfy/user.db"
+auth-default-access: "deny-all"   # create users with: docker exec -it ntfy ntfy user add <name>
+behind-proxy: false

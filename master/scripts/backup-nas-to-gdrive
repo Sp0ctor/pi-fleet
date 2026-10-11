@@ -1,0 +1,15 @@
+#!/bin/sh
+# One-way, non-destructive daily backup of the master fileshare to Google Drive (rclone).
+# 'copy' never deletes anything on the Drive side. Schedule: see master/crontab.example
+set -eu
+
+SOURCE='/mnt/storage/NAS'
+DESTINATION='gdrive:nas-fileshare-backup'
+LOCK='/home/pi/.cache/nas-gdrive-backup.lock'
+LOG='/home/pi/rclone-nas-daily-backup.log'
+
+mkdir -p /home/pi/.cache
+exec /usr/bin/flock -n "$LOCK" /usr/bin/rclone copy "$SOURCE" "$DESTINATION" \
+  --fast-list --transfers 4 --checkers 8 \
+  --no-update-dir-modtime --tpslimit 8 --tpslimit-burst 8 \
+  --log-file "$LOG" --log-level INFO

@@ -1,0 +1,51 @@
+# ============================================================
+# Home Pi Fleet — header widgets (top of the page)
+# Docs: https://gethomepage.dev/widgets/
+# Order here = left-to-right order on the dashboard.
+# ============================================================
+
+- logo:
+    icon: mdi-server-network   # swap for any icon or image URL
+
+- greeting:
+    text_size: xl
+    text: Home Pi Fleet
+
+- resources:
+    label: Master Pi
+    cpu: true
+    memory: true
+    uptime: true
+    expanded: true      # shows detail bars; set false for compact view
+
+- resources:
+    label: Root disk
+    disk: /
+    expanded: true
+
+- resources:
+    label: Fileshare (/mnt/storage)
+    disk: /mnt/storage
+    expanded: true
+
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: medium
+      timeStyle: short
+      hour12: true
+
+# Optional extras — uncomment to enable:
+#
+# Local weather (no API key needed):
+# - openmeteo:
+#     label: Home
+#     latitude: 0.0     # your latitude
+#     longitude: 0.0    # your longitude
+#     units: imperial
+#     cache: 5
+#
+# Search bar in the header:
+# - search:
+#     provider: duckduckgo   # google | bing | brave | custom
+#     target: _blank

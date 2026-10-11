@@ -1,0 +1,19 @@
+# never commit secrets or personal data
+.env
+*.env
+!.env.example
+*.key
+*.pem
+id_*
+rclone.conf
+*.conf.bak
+wg*.conf
+config.xml
+**/data/
+**/config.backup*/
+master/docker/syncthing/config/
+*_state.json
+__pycache__/
+*.pyc
+.DS_Store
+.denylist

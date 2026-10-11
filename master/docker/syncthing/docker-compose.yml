@@ -1,0 +1,14 @@
+services:
+  syncthing:
+    image: linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: pi5-nas                     # unique name
+    network_mode: host                    # uses :8384 for web UI
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+    volumes:
+      - /mnt/storage:/mnt/storage                # the folder you want to sync
+      - ./config:/config                  # Syncthing config & keys
+    restart: unless-stopped

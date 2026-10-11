@@ -1,0 +1,27 @@
+# Passwords live in a .env file next to this one (never committed). Copy .env.example to .env and fill it in.
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?set in .env}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-homelab}
+      MARIADB_USER: ${MARIADB_USER:?set in .env}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:?set in .env}
+      TZ: ${TZ:-UTC}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data:/var/lib/mysql                      # persistent data
+      - ./init:/docker-entrypoint-initdb.d         # optional .sql for first start
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer-mysql
+    ports:
+      - "8083:8080"                                # http://<PI-IP>:8083
+    depends_on:
+      - mariadb
+    restart: unless-stopped

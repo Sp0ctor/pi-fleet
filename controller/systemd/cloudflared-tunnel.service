@@ -1,0 +1,12 @@
+[Unit]
+Description=Cloudflare Tunnel - publishes a small website without opening router ports
+After=network-online.target website.service
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/pi/.local/bin/cloudflared --config /home/pi/.cloudflared/config.yml tunnel run
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
